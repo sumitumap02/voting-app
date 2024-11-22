@@ -1,25 +1,47 @@
 version: '3.8'
 
 services:
-  # Online Voting System Service
+  
   online-voting-system:
     build: .  # Build the Docker image from the Dockerfile in the current directory
-    image: votingapp:latest  # Name the built image
+    image: online-voting-system:latest  # Name the built image
     container_name: online-voting-container  # Container name for this service
     ports:
       - "8181:8181"  # Map container's port 8181 to host's port 8181
     environment:
-      SPRING_DATASOURCE_URL: jdbc:postgresql://host.docker.internal:5432/online_voting_system  # Local DB URL
-      SPRING_DATASOURCE_USERNAME: sumitpg  # Database username
-      SPRING_DATASOURCE_PASSWORD: mailpass  # Database password
+      # Spring Boot application database configuration
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/online_voting_system
+      SPRING_DATASOURCE_USERNAME: sumitpg
+      SPRING_DATASOURCE_PASSWORD: mailpass
       SPRING_DATASOURCE_DRIVER_CLASS_NAME: org.postgresql.Driver
-      SPRING_JPA_HIBERNATE_DDL_AUTO: update  # Automatic schema updates
-      SPRING_MAIN_ALLOW_BEAN_DEFINITION_OVERRIDING: "true"  # Allow bean overriding (use string value)
+      SPRING_JPA_HIBERNATE_DDL_AUTO: update
+      SPRING_MAIN_ALLOW_BEAN_DEFINITION_OVERRIDING: "true"  # Ensure this is a string value, not a boolean
+    depends_on:
+      - postgres  # Ensure that the PostgreSQL service is started before this one
     networks:
-      - voting-network  # Attach this service to the voting-network
+      - voting-network  # Attach this service to the 'voting-network'
 
-# Define custom networks for inter-container communication (you can keep this if needed)
+  # PostgreSQL Service
+  postgres:
+    image: postgres:13  # Use the official PostgreSQL 13 image
+    container_name: postgres  # Name the container for PostgreSQL service
+    environment:
+      POSTGRES_USER: sumitpg  # Set the PostgreSQL user
+      POSTGRES_PASSWORD: mailpass  # Set the PostgreSQL password
+      POSTGRES_DB: online_voting_system  # Name the database
+    volumes:
+      - postgres-data:/var/lib/postgresql/data  # Persist database data using volumes
+    ports:
+      - "5432:5432"  # Map container's port 5432 to host's port 5432
+    networks:
+      - voting-network  # Attach this service to the 'voting-network'
+
+# Define custom networks for inter-container communication
 networks:
   voting-network:
     driver: bridge  # Use the default bridge network
-  
+
+# Define named volumes for persistent PostgreSQL data storage
+volumes:
+  postgres-data:
+    driver: local  # Use local storage for the volume to persist PostgreSQL data
