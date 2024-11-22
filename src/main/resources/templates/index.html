@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Online Voting System</title>
+        <script src="https://cdn.tailwindcss.com"></script>
+        <style>
+        /* Custom animation for the gradient background */
+        @keyframes gradient {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+    </style>
+    </head>
+    <body
+        class="min-h-screen bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 animate-gradient text-white font-sans">
+
+        <div
+            class="flex flex-col items-center justify-center min-h-screen text-center px-6">
+            <!-- Logo -->
+            <div class="mb-8">
+                <img
+                    src="https://upload.wikimedia.org/wikipedia/mai/d/dd/%E0%A4%AD%E0%A4%BE%E0%A4%B0%E0%A4%A4%E0%A5%80%E0%A4%AF_%E0%A4%9A%E0%A5%81%E0%A4%A8%E0%A4%BE%E0%A4%B5_%E0%A4%86%E0%A4%AF%E0%A5%8B%E0%A4%97%E0%A4%95_%E0%A4%B2%E0%A5%8B%E0%A4%97%E0%A5%8B.png"
+                    alt="Voting Logo"
+                    class="w-[400px] h-[300px] mx-auto animate-pulse" />
+            </div>
+
+            <!-- Title -->
+            <h1 class="text-4xl font-extrabold mb-4 tracking-wide">Welcome to
+                <span class="text-yellow-300">Online Voting</span></h1>
+
+            <!-- Subtitle -->
+            <p class="text-lg mb-6 leading-relaxed">
+                Cast your votes securely and effortlessly. Access the full
+                documentation to learn more about the app's functionality.
+            </p>
+
+            <!-- Call-to-Action Button -->
+            <a
+                href="https://voting-app-ea6x.onrender.com/swagger-ui/index.html#"
+                class="bg-yellow-400 hover:bg-yellow-500 text-indigo-900 font-semibold py-3 px-6 rounded-lg shadow-lg transform hover:scale-105 transition duration-300 ease-in-out"
+                target="_blank"
+                rel="noopener noreferrer">
+                Access Documentation
+            </a>
+
+            <!-- Decorative Elements -->
+            <div class="mt-12">
+                <div class="flex justify-center items-center gap-4">
+                    <div
+                        class="w-4 h-4 bg-white rounded-full animate-bounce"></div>
+                    <div
+                        class="w-4 h-4 bg-white rounded-full animate-bounce delay-200"></div>
+                    <div
+                        class="w-4 h-4 bg-white rounded-full animate-bounce delay-400"></div>
+                </div>
+            </div>
+        </div>
+
+    </body>
+</html>
